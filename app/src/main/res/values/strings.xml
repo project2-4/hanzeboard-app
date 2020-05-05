@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HanzeBoard</string>
+    <string name="key_jwt_token">JWT_TOKEN</string>
 </resources>
