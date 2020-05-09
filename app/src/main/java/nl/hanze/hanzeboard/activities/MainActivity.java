@@ -1,6 +1,5 @@
-package nl.hanze.hanzeboard;
+package nl.hanze.hanzeboard.activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.security.Security;
 import java.util.Objects;
 
+import nl.hanze.hanzeboard.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
