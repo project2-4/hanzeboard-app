@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setEnabled(false);
 
-        Call<LoginResponse> loginResponseCall = userClient.login(loginRequest);
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+        Call<LoginResponse> loginCall = userClient.login(loginRequest);
+        loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.body() != null) {

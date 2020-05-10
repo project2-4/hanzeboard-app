@@ -10,9 +10,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.util.Set;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.api.responses.LoginResponse;
+import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -33,22 +35,18 @@ public class AuthTokenGrabber implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request request = chain.request();
         Response response = chain.proceed(chain.request());
 
-        if(request.url().toString().contains("auth/login")) { // Hmmm?
-            if(response.isSuccessful() && response.body() != null) {
-                LoginResponse loginResponse = new Gson().fromJson(response.body().string(), LoginResponse.class);
+        Headers headers = response.headers();
 
-                tokensPreferences
-                        .edit()
-                        .putString(context.getString(R.string.key_jwt_token), loginResponse.getAccessToken())
-                        .apply();
+        if(response.isSuccessful() && headers.names().contains("Authorization")) {
+            tokensPreferences
+                    .edit()
+                    .putString(context.getString(R.string.key_jwt_token), headers.get("Authorization"))
+                    .apply();
 
-                Log.d(TAG, "Access token = " + loginResponse.getAccessToken());
-            }
+            Log.d(TAG, "Access token = " + headers.get("Authorization"));
         }
-
 
         return response;
     }
