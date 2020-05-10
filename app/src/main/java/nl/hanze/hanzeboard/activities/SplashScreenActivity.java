@@ -20,11 +20,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         UserClient userClient = API.createService(this, UserClient.class);
 
-        Call<UserResponse> user =  userClient.me();
+        Call<UserResponse> user = userClient.me();
         user.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     startActivity(new Intent(SplashScreenActivity.this, OverviewActivity.class));
                     finish();
                 } else {

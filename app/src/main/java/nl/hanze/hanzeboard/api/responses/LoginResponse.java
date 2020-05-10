@@ -13,12 +13,6 @@ public class LoginResponse {
     @SerializedName("expires_in")
     private Integer expiresIn;
 
-    public LoginResponse(String accessToken, String tokenType, Integer expiresIn) {
-        this.accessToken = accessToken;
-        this.tokenType = tokenType;
-        this.expiresIn = expiresIn;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }

@@ -1,15 +1,13 @@
 package nl.hanze.hanzeboard.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.api.API;
@@ -50,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     Toast.makeText(LoginActivity.this, "Succesvol ingelogd", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LoginActivity.this, OverviewActivity.class));
                     finish();

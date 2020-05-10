@@ -2,7 +2,6 @@ package nl.hanze.hanzeboard.api;
 
 import android.content.Context;
 
-import nl.hanze.hanzeboard.api.clients.UserClient;
 import nl.hanze.hanzeboard.api.interceptors.AuthTokenGrabber;
 import nl.hanze.hanzeboard.api.interceptors.AuthTokenInject;
 import okhttp3.OkHttpClient;

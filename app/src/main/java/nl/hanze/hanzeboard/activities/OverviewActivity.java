@@ -1,15 +1,11 @@
 package nl.hanze.hanzeboard.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.api.API;
@@ -36,7 +32,7 @@ public class OverviewActivity extends AppCompatActivity {
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     UserResponse userResponse = response.body();
                     tokenTextView.setText(userResponse.getName());
                 }
