@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
 import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.UserClient;
 import nl.hanze.hanzeboard.api.requests.LoginRequest;
