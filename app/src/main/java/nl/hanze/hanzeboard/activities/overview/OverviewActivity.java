@@ -2,6 +2,7 @@ package nl.hanze.hanzeboard.activities.overview;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 import nl.hanze.hanzeboard.R;
@@ -47,6 +49,7 @@ public class OverviewActivity extends AppCompatActivity {
 
         TextView textViewUsername = menuView.findViewById(R.id.headerUsername);
         TextView textViewEmail = menuView.findViewById(R.id.headerEmail);
+        ImageView imageViewAvatar = menuView.findViewById(R.id.headerAvatar);
 
         mViewModel = new ViewModelProvider(this).get(OverviewViewModel.class);
         mViewModel.init(this);
@@ -54,6 +57,17 @@ public class OverviewActivity extends AppCompatActivity {
         mViewModel.getUser().observe(this, user -> {
             textViewEmail.setText(user.getEmail());
             textViewUsername.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
+
+            String avatarUrl = "https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg";
+
+            if (user.getAvatarUrl() != null) {
+                avatarUrl = user.getAvatarUrl();
+            }
+
+            Glide.with(menuView)
+                    .load(avatarUrl)
+                    .circleCrop()
+                    .into(imageViewAvatar);
         });
 
         // Passing each menu ID as a set of Ids because each
