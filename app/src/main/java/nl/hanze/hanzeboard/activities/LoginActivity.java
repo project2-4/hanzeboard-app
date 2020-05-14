@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
 import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.UserClient;
 import nl.hanze.hanzeboard.api.requests.LoginRequest;
@@ -29,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         userClient = API.createService(this, UserClient.class);
 
         loginButton = findViewById(R.id.loginButton);
