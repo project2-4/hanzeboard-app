@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
-import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.UserClient;
 import nl.hanze.hanzeboard.api.requests.LoginRequest;
 import nl.hanze.hanzeboard.api.responses.LoginResponse;
@@ -31,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userClient = API.createService(this, UserClient.class);
 
         loginButton = findViewById(R.id.loginButton);
         emailEditText = findViewById(R.id.emailText);
