@@ -15,6 +15,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashScreenActivity extends AppCompatActivity {
+
+    /**
+     * Lifecycle method onCreate, sets the contentView of this class and initializes the variables/
+     * properties necessary for this class a.k.a. in order for this class to function properly.
+     *
+     * @param savedInstanceState a bundle used to pass data between activities.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

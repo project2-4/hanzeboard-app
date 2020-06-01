@@ -24,6 +24,11 @@ public class OverviewActivity extends AppCompatActivity {
     private OverviewViewModel mViewModel;
     private AppBarConfiguration mAppBarConfiguration;
 
+    /**
+     * Lifecycle method onCreate, sets the contentView of this class and initiates the init method.
+     *
+     * @param savedInstanceState a bundle used to pass data between activities.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,11 @@ public class OverviewActivity extends AppCompatActivity {
         init();
     }
 
+    /**
+     * Method to bind the onSupportNavigateUp event.
+     *
+     * @return true or false whether this element should be navigated up or down.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -38,6 +48,10 @@ public class OverviewActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * The init method of this class. Here everything will be declared and initialized in order for
+     * this class to function properly.
+     */
     private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

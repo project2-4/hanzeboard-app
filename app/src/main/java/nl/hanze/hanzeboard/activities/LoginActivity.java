@@ -26,6 +26,12 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private UserClient userClient;
 
+    /**
+     * Lifecycle method onCreate, sets the contentView of this class and initializes the variables/
+     * properties necessary for this class a.k.a. in order for this class to function properly.
+     *
+     * @param savedInstanceState a bundle used to pass data between activities.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(this::checkLogin);
     }
 
+    /**
+     * Checks whether the login request is valid or not.
+     *
+     * @param v the view of the current activity.
+     */
     private void checkLogin(View v) {
         LoginRequest loginRequest = new LoginRequest(emailEditText.getText().toString(), passwordEditText.getText().toString());
 

@@ -14,9 +14,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OverviewViewModel extends ViewModel {
+
     private MutableLiveData<UserResponse> mUser = new MutableLiveData<>();
     private UserClient userClient;
 
+    /**
+     * The init method of this class. Here everything will be declared and initialized in order for
+     * this class to function properly.
+     */
     public void init(Context context) {
         userClient = API.createService(context, UserClient.class);
         Call<UserResponse> userCall = userClient.me();
@@ -34,6 +39,11 @@ public class OverviewViewModel extends ViewModel {
         });
     }
 
+    /**
+     * Getter for the mUser property.
+     *
+     * @return the corresponding UserClient, mUser.
+     */
     public LiveData<UserResponse> getUser() {
         return mUser;
     }

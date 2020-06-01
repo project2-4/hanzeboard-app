@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".activities.overview.absent.AbsentFragment">
 
-    <TextView
+    <GridView
+        android:id="@+id/absenteesGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Absent" />
+        android:gravity="center"
+        android:columnWidth="190dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="24dp"
+        android:stretchMode="spacingWidthUniform" />
 
 </FrameLayout>
