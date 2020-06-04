@@ -8,12 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.List;
+
 import nl.hanze.hanzeboard.R;
 
 public class AbsenteesAdapter extends BaseAdapter {
 
     private Context context;
-    private Absentee[] absentees;
+    private List<Absentee> absentees;
 
     /**
      * Constructor for the AbsenteesAdapter class.
@@ -21,7 +25,7 @@ public class AbsenteesAdapter extends BaseAdapter {
      * @param context the context of the activity.
      * @param absentees the array of absentees.
      */
-    public AbsenteesAdapter(Context context, Absentee[] absentees){
+    public AbsenteesAdapter(Context context, List<Absentee> absentees){
         this.context = context;
         this.absentees = absentees;
     }
@@ -33,7 +37,7 @@ public class AbsenteesAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return absentees.length;
+        return absentees.size();
     }
 
     /**
@@ -44,7 +48,7 @@ public class AbsenteesAdapter extends BaseAdapter {
      */
     @Override
     public Object getItem(int position) {
-        return absentees[position];
+        return absentees.get(position);
     }
 
     /**
@@ -77,9 +81,9 @@ public class AbsenteesAdapter extends BaseAdapter {
         TextView absentTeacher = convertView.findViewById(R.id.absentTeacher);
         TextView absenceReason = convertView.findViewById(R.id.absentReason);
 
-        String teacherString = absentees[position].getName() + " (" + absentees[position].getAbbreviation() + ")";
+        String teacherString = absentees.get(position).getName() + " (" + absentees.get(position).getAbbreviation() + ")";
         absentTeacher.setText(teacherString);
-        absenceReason.setText(absentees[position].getStatus());
+        absenceReason.setText(absentees.get(position).getStatus());
 
         return convertView;
     }

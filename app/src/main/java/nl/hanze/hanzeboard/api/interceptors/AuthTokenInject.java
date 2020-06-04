@@ -32,8 +32,15 @@ public class AuthTokenInject implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
+        /*if(tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID") != null){
+            tokensPreferences
+                    .edit()
+                    .remove(context.getString(R.string.key_jwt_token))
+                    .apply();
+        }*/
+
         if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
-            String authToken = tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
+            String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
 
             request = request.newBuilder()
                     .addHeader("Authorization", authToken)
