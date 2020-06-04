@@ -1,6 +1,7 @@
 package nl.hanze.hanzeboard.activities.overview;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,13 +17,19 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
 public class OverviewActivity extends AppCompatActivity {
 
     private OverviewViewModel mViewModel;
     private AppBarConfiguration mAppBarConfiguration;
+    private List<CourseResponse> courseList;
 
     /**
      * Lifecycle method onCreate, sets the contentView of this class and initiates the init method.
@@ -33,6 +40,7 @@ public class OverviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+        courseList = new ArrayList<>();
         init();
     }
 
@@ -84,6 +92,10 @@ public class OverviewActivity extends AppCompatActivity {
                     .into(imageViewAvatar);
         });
 
+        mViewModel.getCourses().observe(this, courseMessage -> {
+            courseList.addAll(courseMessage.getObjectList());
+        });
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -94,5 +106,9 @@ public class OverviewActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    public List<CourseResponse> getCourseList() {
+        return courseList;
     }
 }

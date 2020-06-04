@@ -2,7 +2,6 @@ package nl.hanze.hanzeboard.api;
 
 import android.content.Context;
 
-import nl.hanze.hanzeboard.api.interceptors.AuthTokenGrabber;
 import nl.hanze.hanzeboard.api.interceptors.AuthTokenInject;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -19,12 +18,11 @@ public class API {
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-
     public static <S> S createService(Context context, Class<S> serviceClass) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        httpClient.addInterceptor(new AuthTokenGrabber(context));
+        //httpClient.addInterceptor(new AuthTokenGrabber(context));
         httpClient.addInterceptor(new AuthTokenInject(context));
         httpClient.addInterceptor(logging);
 

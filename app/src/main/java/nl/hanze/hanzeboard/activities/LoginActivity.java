@@ -1,7 +1,10 @@
 package nl.hanze.hanzeboard.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private UserClient userClient;
+    private SharedPreferences tokensPreferences;
 
     /**
      * Lifecycle method onCreate, sets the contentView of this class and initializes the variables/
@@ -43,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordText);
 
         loginButton.setOnClickListener(this::checkLogin);
+
+        tokensPreferences = getApplicationContext()
+                .getSharedPreferences(getString(R.string.key_tokens), Context.MODE_PRIVATE);
     }
 
     /**
@@ -60,6 +67,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.body() != null) {
+                    tokensPreferences
+                            .edit()
+                            .putString(getString(R.string.key_jwt_token), response.body().getAccessToken())
+                            .apply();
                     Toast.makeText(LoginActivity.this, "Succesvol ingelogd", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LoginActivity.this, OverviewActivity.class));
                     finish();
