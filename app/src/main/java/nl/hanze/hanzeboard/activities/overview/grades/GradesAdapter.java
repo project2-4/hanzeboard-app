@@ -8,18 +8,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import nl.hanze.hanzeboard.R;
 
 public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder> {
 
-    private Grade[] grades;
+    private List<Grade> grades;
 
     /**
      * Constructor for the AnnouncementsAdapter class.
      *
      * @param grades the array of Announcement objects, announcements.
      */
-    public GradesAdapter(Grade[] grades){
+    public GradesAdapter(List<Grade> grades){
         this.grades = grades;
     }
 
@@ -48,8 +50,8 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.assignmentListItem.setText(grades[position].getAssignment());
-        holder.gradeListItem.setText(String.valueOf(grades[position].getGrade())) ;
+        holder.assignmentListItem.setText(grades.get(position).getAssignment());
+        holder.gradeListItem.setText(String.valueOf(grades.get(position).getGrade())) ;
     }
 
     /**
@@ -59,7 +61,7 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        return grades.length;
+        return grades.size();
     }
 
     /**

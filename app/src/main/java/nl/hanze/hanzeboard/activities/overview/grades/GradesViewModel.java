@@ -1,28 +1,45 @@
 package nl.hanze.hanzeboard.activities.overview.grades;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import nl.hanze.hanzeboard.api.API;
+import nl.hanze.hanzeboard.api.clients.GradeClient;
+import nl.hanze.hanzeboard.api.clients.StaffClient;
+import nl.hanze.hanzeboard.api.responses.grade.GradeMessageResponse;
+import nl.hanze.hanzeboard.api.responses.staff.StaffMessageResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GradesViewModel extends ViewModel {
 
-    private Grade[] grades = {new Grade("9.5", "Algorithms and data structures"), new Grade("7.6", "OOP3 and Design Patterns"),
-            new Grade("9.2", "Academic Writing"), new Grade("8.8", "Project 2.3 Software Engineering"),
-            new Grade("7.9", "Discrete Mathematics I"), new Grade("7.4", "OOP4"),
-            new Grade("5.5", "OOP5"), new Grade("10", "Web & Mobile Services"),
-            new Grade("9.4", "French I"), new Grade("7.8", "French II"),
-            new Grade("8.5", "Project 2.4 Web & Mobile Services and Web Development"), new Grade("6", "Research and Reporting Skills"),
-            new Grade("P", "Artificial Intelligence Lab"), new Grade("7.3", "Machine Learning I "),
-            new Grade("P", "Business Intelligence Lab"), new Grade("9.3", "Machine Learning II"),
-            new Grade("8.4", "Japanese I"), new Grade("8.3", "Japanese II")
-    };
+    private GradeClient gradeClient;
+    private MutableLiveData<GradeMessageResponse> mGrades = new MutableLiveData<>();
 
-    /**
-     * Getter for the grades array.
-     *
-     * @return the grades array.
-     */
-    public Grade[] getGrades(){
-        return grades;
+    public void init(Context context) {
+        gradeClient = API.createService(context, GradeClient.class);
+
+        Call<GradeMessageResponse> courseCall = gradeClient.getGrades();
+        courseCall.enqueue(new Callback<GradeMessageResponse>() {
+            @Override
+            public void onResponse(Call<GradeMessageResponse> call, Response<GradeMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    mGrades.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GradeMessageResponse> call, Throwable t) {
+                Log.v("ERROR: ", t.getMessage());
+            }
+        });
     }
 
-
+    public MutableLiveData<GradeMessageResponse> getGrades() {
+        return mGrades;
+    }
 }

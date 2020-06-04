@@ -2,7 +2,7 @@ package nl.hanze.hanzeboard.activities.overview.grades;
 
 public class Grade {
 
-    private String grade;
+    private double grade;
     private String assignment;
 
     /**
@@ -11,7 +11,7 @@ public class Grade {
      * @param grade the grade of the assignment.
      * @param assignment the corresponding assignment.
      */
-    public Grade(String grade, String assignment){
+    public Grade(double grade, String assignment){
         this.grade = grade;
         this.assignment = assignment;
     }
@@ -21,7 +21,7 @@ public class Grade {
      *
      * @return the grade property.
      */
-    public String getGrade() {
+    public double getGrade() {
         return grade;
     }
 
@@ -39,7 +39,7 @@ public class Grade {
      *
      * @param grade the grade to be set.
      */
-    public void setGrade(String grade) {
+    public void setGrade(double grade) {
         this.grade = grade;
     }
 

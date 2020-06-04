@@ -7,11 +7,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
-
 import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.StaffClient;
-import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 import nl.hanze.hanzeboard.api.responses.staff.StaffMessageResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +19,7 @@ public class AbsentViewModel extends ViewModel {
     private StaffClient staffClient;
     private MutableLiveData<StaffMessageResponse> mStaffData = new MutableLiveData<>();
 
-    public void init(Context context, List<CourseResponse> courses) {
+    public void init(Context context) {
         staffClient = API.createService(context, StaffClient.class);
 
         Call<StaffMessageResponse> courseCall = staffClient.getStaffMessage();

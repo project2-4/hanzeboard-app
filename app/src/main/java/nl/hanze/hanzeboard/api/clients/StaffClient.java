@@ -6,6 +6,6 @@ import retrofit2.http.GET;
 
 public interface StaffClient {
 
-    @GET("courses/1/staff")
+    @GET("staff/me")
     Call<StaffMessageResponse> getStaffMessage();
 }
