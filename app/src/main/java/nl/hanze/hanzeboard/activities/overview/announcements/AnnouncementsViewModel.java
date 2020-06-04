@@ -1,9 +1,29 @@
 package nl.hanze.hanzeboard.activities.overview.announcements;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.List;
+
+import nl.hanze.hanzeboard.api.API;
+import nl.hanze.hanzeboard.api.clients.AnnouncementClient;
+import nl.hanze.hanzeboard.api.responses.announcement.AnnouncementMessageResponse;
+import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
+import nl.hanze.hanzeboard.api.responses.staff.StaffMessageResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AnnouncementsViewModel extends ViewModel {
     // TODO: Implement the ViewModel
+
+    private AnnouncementClient announcementClient;
+    private MutableLiveData<AnnouncementMessageResponse> mAnnouncementsData = new MutableLiveData<>();
+
     private Announcement[] announcements = {
             new Announcement("Alweer een inzage verplaatst!", "Docent", "12 December 2020 op 14:59", "Ja het gebeurt wel eens, een inzage wordt verplaatst. Sucks to be you, dit ook het geval bij het vak OOP5 Quantum computing with applied linear regression. Tja sorry voor 96.5% die dit vak niet heeft gehaald."),
             new Announcement("Inzage moment OOP5", "Docent", "12 December 2020 op 14:57", "Het inzage moment voor OOP5 staat ingepland op 1 Juno. Maar dit is niet 100% zeker, verder kan door de corona crisis voor deze toets geen 6de kans komen. Sucks to be you."),
@@ -37,12 +57,26 @@ public class AnnouncementsViewModel extends ViewModel {
             new Announcement("Resultaten OOP2", "Docent", "12 December 2020 op 14:55", "De resultaten van het vak OOP5 zijn beter dan vorig jaar! 3.5% van alle studenten heeft het dit keer gehaald! Van harte gefeliciteerd. Meer informatie over een inzagemoment volgt."),
     };
 
-    /**
-     * Getter for the announcements array.
-     *
-     * @return the announcements array.
-     */
-    public Announcement[] getAnnouncements(){
-        return announcements;
+    public void init(Context context, List<CourseResponse> courses){
+        announcementClient = API.createService(context, AnnouncementClient.class);
+
+        Call<AnnouncementMessageResponse> courseCall = announcementClient.getAnnouncements("1");
+        courseCall.enqueue(new Callback<AnnouncementMessageResponse>() {
+            @Override
+            public void onResponse(Call<AnnouncementMessageResponse> call, Response<AnnouncementMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    mAnnouncementsData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AnnouncementMessageResponse> call, Throwable t) {
+                Log.v("ERROR: ", t.getMessage());
+            }
+        });
+    }
+
+    public LiveData<AnnouncementMessageResponse> getAnnouncementsData() {
+        return mAnnouncementsData;
     }
 }

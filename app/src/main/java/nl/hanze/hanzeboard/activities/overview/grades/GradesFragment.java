@@ -1,6 +1,7 @@
 package nl.hanze.hanzeboard.activities.overview.grades;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.api.responses.grade.GradeResponse;
 
 public class GradesFragment extends Fragment {
 
@@ -69,12 +74,27 @@ public class GradesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(GradesViewModel.class);
-        // TODO: Use the ViewModel
+        mViewModel.init(getContext());
 
-        Grade[] grades = mViewModel.getGrades();
+        List<Grade> grades = new ArrayList<>();
+        String[] names = {"Algorithms and data structures", "OOP3 and Design Patterns", "Academic Writing",
+                "Project 2.3 Software Engineering", "Discrete Mathematics I", "OOP4", "OOP5", "Machine Learning II",
+                "Web & Mobile Services", "French I", "French II", "Project 2.4 Web & Mobile Services and Web Development",
+                "Research and Reporting Skills", "Business Intelligence Lab", "Machine Learning I",
+                "Research and Reporting Skills", "Japanese I", "Japanese II", "Operating Systems",
+                "Infrastructures", "Chinese I", "Chinese II", "Computer Networking"};
+        int length = names.length;
 
-        GradesAdapter gradesAdapter = new GradesAdapter(grades);
-        gradesListView.setAdapter(gradesAdapter);
+        mViewModel.getGrades().observe(getViewLifecycleOwner(), gradeMessageResponse -> {
+            int i = 0;
+            List<GradeResponse> gradeMessageResponseList = gradeMessageResponse.getObjectList();
+            for(GradeResponse gradeResponse : gradeMessageResponseList){
+                grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), names[i++ % length]));
+                Log.v("Grades: ", gradeResponse.getGrade());
+            }
+            GradesAdapter gradesAdapter = new GradesAdapter(grades);
+            gradesListView.setAdapter(gradesAdapter);
+        });
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         gradesListView.addItemDecoration(dividerItemDecoration);

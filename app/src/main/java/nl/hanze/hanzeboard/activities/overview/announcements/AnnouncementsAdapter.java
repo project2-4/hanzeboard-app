@@ -10,18 +10,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.List;
+
 import nl.hanze.hanzeboard.R;
 
 public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdapter.ViewHolder> {
 
-    private Announcement[] announcements;
+    private List<Announcement> announcements;
 
     /**
      * Constructor for the AnnouncementsAdapter class.
      *
      * @param announcements the array of Announcement objects, announcements.
      */
-    public AnnouncementsAdapter(Announcement[] announcements){
+    public AnnouncementsAdapter(List<Announcement> announcements){
         this.announcements = announcements;
     }
 
@@ -50,11 +52,11 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.announcerView.setText(announcements[position].getAnnouncer());
-        holder.announcementTitle.setText(announcements[position].getTitle());
-        holder.contentView.setText(announcements[position].getContent());
-        holder.dateView.setText(announcements[position].getDate());
-        holder.expandableLayout.setVisibility(announcements[position].isExpanded() ? View.VISIBLE : View.GONE);
+        holder.announcerView.setText(announcements.get(position).getAnnouncer());
+        holder.announcementTitle.setText(announcements.get(position).getTitle());
+        holder.contentView.setText(announcements.get(position).getContent());
+        holder.dateView.setText(announcements.get(position).getDate());
+        holder.expandableLayout.setVisibility(announcements.get(position).isExpanded() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -64,7 +66,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
      */
     @Override
     public int getItemCount() {
-        return announcements.length;
+        return announcements.size();
     }
 
     /**
@@ -95,7 +97,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
 
             itemView.setOnClickListener(v -> {
-                Announcement announcement = announcements[getAdapterPosition()];
+                Announcement announcement = announcements.get(getAdapterPosition());
                 announcement.setExpanded(!announcement.isExpanded());
                 notifyItemChanged(getAdapterPosition());
             });

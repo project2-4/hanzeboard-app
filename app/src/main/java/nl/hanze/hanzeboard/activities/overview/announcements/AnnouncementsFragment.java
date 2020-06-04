@@ -1,6 +1,7 @@
 package nl.hanze.hanzeboard.activities.overview.announcements;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
+import nl.hanze.hanzeboard.activities.overview.absent.Absentee;
+import nl.hanze.hanzeboard.api.responses.announcement.AnnouncementResponse;
+import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
 public class AnnouncementsFragment extends Fragment {
 
@@ -66,12 +74,28 @@ public class AnnouncementsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AnnouncementsViewModel.class);
-        // TODO: Use the ViewModel
 
-        Announcement[] announcementsArray = mViewModel.getAnnouncements();
-        announcementsAdapter = new AnnouncementsAdapter(announcementsArray);
-        announcementsView.setAdapter(announcementsAdapter);
+        List<CourseResponse> courses = ((OverviewActivity) requireActivity()).getCourseList();
+        mViewModel = new ViewModelProvider(this).get(AnnouncementsViewModel.class);
+        mViewModel.init(getContext(), courses);
+
+        List<Announcement> announcementList = new ArrayList<>();
+        mViewModel.getAnnouncementsData().observe(getViewLifecycleOwner(), announcementMessageResponse -> {
+            List<AnnouncementResponse> announcementMessageResponseList = announcementMessageResponse.getObjectList();
+            Announcement temp;
+            for(AnnouncementResponse announcementResponse : announcementMessageResponseList){
+                temp = new Announcement(
+                        announcementResponse.getTitle(),
+                        announcementResponse.getAnnouncerResponse().getAnnouncerProfileResponse()
+                                .getFullName() + " (" + announcementResponse.getAnnouncerResponse().getAbbreviation() + ")",
+                        announcementResponse.getCreatedAt(),
+                        announcementResponse.getContent());
+                announcementList.add(temp);
+            }
+
+            announcementsAdapter = new AnnouncementsAdapter(announcementList);
+            announcementsView.setAdapter(announcementsAdapter);
+        });
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         announcementsView.addItemDecoration(dividerItemDecoration);

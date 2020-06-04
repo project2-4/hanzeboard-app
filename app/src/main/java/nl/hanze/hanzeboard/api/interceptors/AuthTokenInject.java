@@ -1,6 +1,7 @@
 package nl.hanze.hanzeboard.api.interceptors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -9,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.LoginActivity;
+import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

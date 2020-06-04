@@ -76,10 +76,9 @@ public class AbsentFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         List<CourseResponse> courses = ((OverviewActivity) requireActivity()).getCourseList();
-        Log.v("course name: ", String.valueOf(courses.get(0).getName()));
 
         mViewModel = new ViewModelProvider(this).get(AbsentViewModel.class);
-        mViewModel.init(getContext(), courses);
+        mViewModel.init(getContext());
 
         List<Absentee> absenteeList = new ArrayList<>();
         mViewModel.getStaffData().observe(getViewLifecycleOwner(), staffMessageResponseData -> {
@@ -87,7 +86,10 @@ public class AbsentFragment extends Fragment {
             Absentee temp;
             for(StaffResponse staffResponse : staffResponseList){
                 if(!staffResponse.getStaffProfileResponse().getStatusResponse().getStatus().equals("available")) {
-                    temp = new Absentee(staffResponse.getFullName(), staffResponse.getStaffProfileResponse().getAbbreviation(), staffResponse.getStaffProfileResponse().getStatusResponse().getStatus());
+                    temp = new Absentee(
+                            staffResponse.getFullName(),
+                            staffResponse.getStaffProfileResponse().getAbbreviation(),
+                            staffResponse.getStaffProfileResponse().getStatusResponse().getStatus());
                     absenteeList.add(temp);
                 }
             }
