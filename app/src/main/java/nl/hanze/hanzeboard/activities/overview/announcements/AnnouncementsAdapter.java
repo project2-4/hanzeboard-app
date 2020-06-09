@@ -21,7 +21,7 @@ public class AnnouncementsAdapter extends RecyclerView.Adapter<AnnouncementsAdap
     /**
      * Constructor for the AnnouncementsAdapter class.
      *
-     * @param announcements the array of Announcement objects, announcements.
+     * @param announcements the array of Announcement objects.
      */
     public AnnouncementsAdapter(List<Announcement> announcements){
         this.announcements = announcements;

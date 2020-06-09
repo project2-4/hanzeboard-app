@@ -19,7 +19,7 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
     /**
      * Constructor for the AnnouncementsAdapter class.
      *
-     * @param grades the array of Announcement objects, announcements.
+     * @param grades the array of Announcement objects.
      */
     public GradesAdapter(List<Grade> grades){
         this.grades = grades;

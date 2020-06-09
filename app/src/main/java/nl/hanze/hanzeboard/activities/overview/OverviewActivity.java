@@ -30,6 +30,7 @@ public class OverviewActivity extends AppCompatActivity {
     private OverviewViewModel mViewModel;
     private AppBarConfiguration mAppBarConfiguration;
     private List<CourseResponse> courseList;
+    private int courseId;
 
     /**
      * Lifecycle method onCreate, sets the contentView of this class and initiates the init method.
@@ -99,7 +100,7 @@ public class OverviewActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_grades, R.id.nav_announcements, R.id.nav_absent)
+                R.id.nav_home, R.id.nav_grades, R.id.nav_courses, R.id.nav_absent)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -110,5 +111,13 @@ public class OverviewActivity extends AppCompatActivity {
 
     public List<CourseResponse> getCourseList() {
         return courseList;
+    }
+
+    public void setCurrentCourse(int id){
+        this.courseId = id;
+    }
+
+    public CourseResponse getCurrentCourse(){
+        return this.courseList.get(courseId);
     }
 }

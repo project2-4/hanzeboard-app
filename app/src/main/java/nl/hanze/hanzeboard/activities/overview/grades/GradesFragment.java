@@ -90,7 +90,6 @@ public class GradesFragment extends Fragment {
             List<GradeResponse> gradeMessageResponseList = gradeMessageResponse.getObjectList();
             for(GradeResponse gradeResponse : gradeMessageResponseList){
                 grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), names[i++ % length]));
-                Log.v("Grades: ", gradeResponse.getGrade());
             }
             GradesAdapter gradesAdapter = new GradesAdapter(grades);
             gradesListView.setAdapter(gradesAdapter);
