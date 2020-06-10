@@ -77,19 +77,16 @@ public class GradesFragment extends Fragment {
         mViewModel.init(getContext());
 
         List<Grade> grades = new ArrayList<>();
-        String[] names = {"Algorithms and data structures", "OOP3 and Design Patterns", "Academic Writing",
-                "Project 2.3 Software Engineering", "Discrete Mathematics I", "OOP4", "OOP5", "Machine Learning II",
-                "Web & Mobile Services", "French I", "French II", "Project 2.4 Web & Mobile Services and Web Development",
-                "Research and Reporting Skills", "Business Intelligence Lab", "Machine Learning I",
-                "Research and Reporting Skills", "Japanese I", "Japanese II", "Operating Systems",
-                "Infrastructures", "Chinese I", "Chinese II", "Computer Networking"};
-        int length = names.length;
 
         mViewModel.getGrades().observe(getViewLifecycleOwner(), gradeMessageResponse -> {
-            int i = 0;
             List<GradeResponse> gradeMessageResponseList = gradeMessageResponse.getObjectList();
+            StringBuilder temp = new StringBuilder();
             for(GradeResponse gradeResponse : gradeMessageResponseList){
-                grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), names[i++ % length]));
+                temp.append(gradeResponse.getAssignmentResponse().getName());
+                temp.append(": ");
+                temp.append(gradeResponse.getAssignmentResponse().getSubjectResponse().getName());
+                grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), temp.toString()));
+                temp.setLength(0);
             }
             GradesAdapter gradesAdapter = new GradesAdapter(grades);
             gradesListView.setAdapter(gradesAdapter);
