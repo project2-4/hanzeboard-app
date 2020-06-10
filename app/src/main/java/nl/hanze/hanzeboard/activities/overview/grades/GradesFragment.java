@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -62,6 +63,8 @@ public class GradesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gradesListView = view.findViewById(R.id.gradesListView);
+        gradesListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        gradesListView.setAdapter(new GradesAdapter(new ArrayList<>()));
     }
 
     /**
