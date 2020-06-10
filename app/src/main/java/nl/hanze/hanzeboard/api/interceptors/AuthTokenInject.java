@@ -42,6 +42,8 @@ public class AuthTokenInject implements Interceptor {
                     .apply();
         }*/
 
+        
+
         if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
             String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
 

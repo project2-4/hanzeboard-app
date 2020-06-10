@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class AnnouncementsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         announcementsView = view.findViewById(R.id.announcementsView);
+        announcementsView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     /**
@@ -91,7 +93,7 @@ public class AnnouncementsFragment extends Fragment {
                         announcementResponse.getContent());
                 announcementList.add(temp);
             }
-
+            announcementsView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             announcementsAdapter = new AnnouncementsAdapter(announcementList);
             announcementsView.setAdapter(announcementsAdapter);
         });
