@@ -22,7 +22,6 @@ public class API {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        //httpClient.addInterceptor(new AuthTokenGrabber(context));
         httpClient.addInterceptor(new AuthTokenInject(context));
         httpClient.addInterceptor(logging);
 

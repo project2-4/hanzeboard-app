@@ -14,7 +14,7 @@
         android:contentDescription="temp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/splashscreen_background" />
+        app:srcCompat="@drawable/android_image" />
 
     <TextView
         android:id="@+id/absentTeacher"
