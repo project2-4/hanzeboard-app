@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/gradeListItem"
-            android:layout_width="30dp"
+            android:layout_width="44dp"
             android:layout_height="match_parent"
             android:layout_weight="33"
             android:textSize="20sp"
