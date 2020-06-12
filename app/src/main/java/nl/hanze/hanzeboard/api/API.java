@@ -2,7 +2,9 @@ package nl.hanze.hanzeboard.api;
 
 import android.content.Context;
 
+import nl.hanze.hanzeboard.api.interceptors.AddCookiesInterceptor;
 import nl.hanze.hanzeboard.api.interceptors.AuthTokenInject;
+import nl.hanze.hanzeboard.api.interceptors.ReceivedCookiesInterceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -22,6 +24,8 @@ public class API {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+        httpClient.addInterceptor(new ReceivedCookiesInterceptor(context));
+        httpClient.addInterceptor(new AddCookiesInterceptor(context));
         httpClient.addInterceptor(new AuthTokenInject(context));
         httpClient.addInterceptor(logging);
 
