@@ -3,6 +3,7 @@ package nl.hanze.hanzeboard.api.interceptors;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.ConditionVariable;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.activities.LoginActivity;
@@ -24,6 +26,8 @@ import retrofit2.Call;
 public class AuthTokenInject implements Interceptor {
 
     private static final String TAG = "AuthTokenInject";
+    private static final ConditionVariable LOCK = new ConditionVariable(true);
+    private static final AtomicBoolean mIsRefreshing = new AtomicBoolean(false);
 
     private Context context;
     private SharedPreferences tokensPreferences;
@@ -49,11 +53,7 @@ public class AuthTokenInject implements Interceptor {
                 .addHeader("Accept", "application/json");
 
         if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
-            String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
-
-            builder.addHeader("Authorization", authToken);
-
-            Log.d(TAG, "Access token = " + authToken);
+            builder = addToken(builder);
         } else {
             Log.d(TAG, "Access token not set");
         }
@@ -61,23 +61,43 @@ public class AuthTokenInject implements Interceptor {
         Response response = chain.proceed(builder.build());
 
         if (response.code() == 401) {
-            synchronized (this) {
-                int code = refreshToken() / 100;
-                if(code != 2) {
-                    logout();
-                }
+            if (tokensPreferences.contains(context.getString(R.string.key_jwt_token))) {
+                // Because we send out multiple HTTP requests in parallel, they might all list a 401 at the same time.
+                // Only one of them should refresh the token.
+                if (mIsRefreshing.compareAndSet(false, true)) {
+                    LOCK.close();
 
-                String newAccessToken = tokensPreferences.getString(context.getString(R.string.key_jwt_token), null);
+                    refreshToken();
 
-                if(newAccessToken != null) {
-                    return chain.proceed(request.newBuilder()
-                            .addHeader("Authorization", newAccessToken)
-                            .build());
+                    LOCK.open();
+                    mIsRefreshing.set(false);
+                } else {
+                    // Another thread is refreshing the token for us, let's wait for it.
+                    LOCK.block();
+
+                    // another thread has refreshed this for us! thanks!
+                    // sign the request with the new token and proceed
+                    // return the outcome of the newly signed request
+                    response = chain.proceed(addToken(request.newBuilder()).build());
                 }
             }
         }
 
+        // check if still unauthorized (i.e. refresh failed)
+        if (response.code() == 401) {
+            logout();
+        }
+
+        // returning the response to the original request
         return response;
+    }
+
+    private Request.Builder addToken(Request.Builder builder) {
+        String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
+
+        Log.d(TAG, "Access token = " + authToken);
+
+        return builder.addHeader("Authorization", authToken);
     }
 
     private int refreshToken() throws IOException {
@@ -86,7 +106,7 @@ public class AuthTokenInject implements Interceptor {
         retrofit2.Response<LoginResponse> response = call.execute();
 
         if (response.body() == null) {
-            return 500;
+            return response.code();
         }
 
         tokensPreferences
