@@ -3,6 +3,7 @@ package nl.hanze.hanzeboard.api.interceptors;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 

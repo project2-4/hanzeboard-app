@@ -50,6 +50,7 @@ public class AuthTokenInject implements Interceptor {
         Request request = chain.request();
 
         Request.Builder builder = request.newBuilder()
+                .removeHeader("Accept")
                 .addHeader("Accept", "application/json");
 
         if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
@@ -67,10 +68,14 @@ public class AuthTokenInject implements Interceptor {
                 if (mIsRefreshing.compareAndSet(false, true)) {
                     LOCK.close();
 
-                    refreshToken();
+                    int code = refreshToken();
 
                     LOCK.open();
                     mIsRefreshing.set(false);
+
+                    if (code != 200) {
+                        logout();
+                    }
                 } else {
                     // Another thread is refreshing the token for us, let's wait for it.
                     LOCK.block();
@@ -83,12 +88,6 @@ public class AuthTokenInject implements Interceptor {
             }
         }
 
-        // check if still unauthorized (i.e. refresh failed)
-        if (response.code() == 401) {
-            logout();
-        }
-
-        // returning the response to the original request
         return response;
     }
 
