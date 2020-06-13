@@ -16,15 +16,12 @@ import okhttp3.Response;
 
 public class ReceivedCookiesInterceptor implements Interceptor {
 
-    private Context context;
     private SharedPreferences cookiePreferences;
 
     public ReceivedCookiesInterceptor(Context context) {
-        this.context = context;
-
         cookiePreferences = context
                 .getApplicationContext()
-                .getSharedPreferences("HTTP_COOKIES", Context.MODE_PRIVATE);
+                .getSharedPreferences(context.getString(R.string.http_cookies), Context.MODE_PRIVATE);
     }
 
     @NotNull
@@ -33,7 +30,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         Response originalResponse = chain.proceed(chain.request());
 
         if (!originalResponse.headers("Set-Cookie").isEmpty()) {
-            HashSet<String> cookies = (HashSet<String>) PreferenceManager.getDefaultSharedPreferences(context).getStringSet("HTTP_COOKIES", new HashSet<>());
+            HashSet<String> cookies = (HashSet<String>) cookiePreferences.getStringSet("HTTP_COOKIES", new HashSet<>());
 
             cookies.addAll(originalResponse.headers("Set-Cookie"));
 

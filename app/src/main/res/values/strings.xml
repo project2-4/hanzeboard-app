@@ -2,6 +2,7 @@
     <string name="app_name">HanzeBoard</string>
     <string name="key_jwt_token">JWT_TOKEN</string>
     <string name="key_tokens">TOKENS</string>
+    <string name="http_cookies">HTTP_COOKIES</string>
     <string name="title_activity_overview">Overview</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
