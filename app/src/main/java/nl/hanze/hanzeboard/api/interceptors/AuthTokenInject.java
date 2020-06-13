@@ -49,19 +49,11 @@ public class AuthTokenInject implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        Request.Builder builder = request.newBuilder()
-                .removeHeader("Accept")
-                .addHeader("Accept", "application/json");
-
-        if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
-            builder = addToken(builder);
-        } else {
-            Log.d(TAG, "Access token not set");
-        }
+        Request.Builder builder = addHeaders(request);
 
         Response response = chain.proceed(builder.build());
 
-        if (response.code() == 401) {
+        if (response.code() == 401 && !request.url().toString().contains("refresh")) {
             if (tokensPreferences.contains(context.getString(R.string.key_jwt_token))) {
                 // Because we send out multiple HTTP requests in parallel, they might all list a 401 at the same time.
                 // Only one of them should refresh the token.
@@ -80,10 +72,9 @@ public class AuthTokenInject implements Interceptor {
                     // Another thread is refreshing the token for us, let's wait for it.
                     LOCK.block();
 
-                    // another thread has refreshed this for us! thanks!
-                    // sign the request with the new token and proceed
-                    // return the outcome of the newly signed request
-                    response = chain.proceed(addToken(request.newBuilder()).build());
+                    // another thread has refreshed this for us.
+                    builder = addHeaders(request).removeHeader("Cookie");
+                    response = chain.proceed(builder.build());
                 }
             }
         }
@@ -91,12 +82,23 @@ public class AuthTokenInject implements Interceptor {
         return response;
     }
 
-    private Request.Builder addToken(Request.Builder builder) {
-        String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
+    private Request.Builder addHeaders(Request request) {
 
-        Log.d(TAG, "Access token = " + authToken);
+        Request.Builder builder = request.newBuilder()
+                .removeHeader("Accept")
+                .addHeader("Accept", "application/json");
 
-        return builder.addHeader("Authorization", authToken);
+        if (tokensPreferences.contains(context.getString(R.string.key_jwt_token)) && !request.headers().names().contains("Authorization")) {
+            String authToken = "Bearer " + tokensPreferences.getString(context.getString(R.string.key_jwt_token), "INVALID");
+
+            builder.addHeader("Authorization", authToken);
+
+            Log.d(TAG, "Access token = " + authToken);
+        } else {
+            Log.d(TAG, "Access token not set");
+        }
+
+        return builder;
     }
 
     private int refreshToken() throws IOException {

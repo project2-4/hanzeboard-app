@@ -25,8 +25,8 @@ public class API {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         httpClient.addInterceptor(new ReceivedCookiesInterceptor(context));
-        httpClient.addInterceptor(new AddCookiesInterceptor(context));
         httpClient.addInterceptor(new AuthTokenInject(context));
+        httpClient.addInterceptor(new AddCookiesInterceptor(context));
         httpClient.addInterceptor(logging);
 
         Retrofit retrofit = builder.client(httpClient.build()).build();
