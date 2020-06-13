@@ -71,11 +71,10 @@ public class AuthTokenInject implements Interceptor {
                 } else {
                     // Another thread is refreshing the token for us, let's wait for it.
                     LOCK.block();
-
-                    // another thread has refreshed this for us.
-                    builder = addHeaders(request).removeHeader("Cookie");
-                    response = chain.proceed(builder.build());
                 }
+
+                builder = addHeaders(request);
+                response = chain.proceed(builder.build());
             }
         }
 
