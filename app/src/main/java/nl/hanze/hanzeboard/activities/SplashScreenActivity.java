@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         user.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.body() != null) {
+                if (response.body() != null && response.code() != 401) {
                     startActivity(new Intent(SplashScreenActivity.this, OverviewActivity.class));
                     finish();
                 } else {

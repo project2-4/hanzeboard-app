@@ -19,4 +19,7 @@ public interface UserClient {
     @POST("auth/logout")
     Call<ResponseBody> logout();
 
+    @POST("auth/refresh")
+    Call<LoginResponse> refresh();
+
 }
