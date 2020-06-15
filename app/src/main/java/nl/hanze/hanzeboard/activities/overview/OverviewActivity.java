@@ -1,7 +1,6 @@
 package nl.hanze.hanzeboard.activities.overview;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +16,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.overview.grades.Assignment;
 import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
 public class OverviewActivity extends AppCompatActivity {
@@ -31,6 +30,7 @@ public class OverviewActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private List<CourseResponse> courseList;
     private int courseId;
+    private Assignment assignment;
 
     /**
      * Lifecycle method onCreate, sets the contentView of this class and initiates the init method.
@@ -117,7 +117,15 @@ public class OverviewActivity extends AppCompatActivity {
         this.courseId = id;
     }
 
+    public void setCurrentGrade(Assignment assignment) {
+         this.assignment = assignment;
+    }
+
     public CourseResponse getCurrentCourse(){
         return this.courseList.get(courseId);
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
     }
 }

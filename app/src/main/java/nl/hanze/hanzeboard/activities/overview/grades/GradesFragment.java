@@ -1,13 +1,9 @@
 package nl.hanze.hanzeboard.activities.overview.grades;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,19 +75,24 @@ public class GradesFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(GradesViewModel.class);
         mViewModel.init(getContext());
 
-        List<Grade> grades = new ArrayList<>();
+        List<Assignment> assignments = new ArrayList<>();
 
         mViewModel.getGrades().observe(getViewLifecycleOwner(), gradeMessageResponse -> {
             List<GradeResponse> gradeMessageResponseList = gradeMessageResponse.getObjectList();
             StringBuilder temp = new StringBuilder();
             for(GradeResponse gradeResponse : gradeMessageResponseList){
                 temp.append(gradeResponse.getAssignmentResponse().getName());
-                // temp.append(": ");
-                // temp.append(gradeResponse.getAssignmentResponse().getSubjectResponse().getName());
-                grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), temp.toString()));
+                assignments.add(new Assignment(
+                         temp.toString(),
+                         gradeResponse.getAssignmentResponse().getCredits(),
+                         Double.parseDouble(gradeResponse.getGrade()),
+                         gradeResponse.getAssignmentResponse().getPassed(),
+                         gradeResponse.getAssignmentResponse().getTotalSubmissions(),
+                         gradeResponse.getAssignmentResponse().getAvgGrade(),
+                         gradeResponse.getAssignmentResponse().getGradeOverview()));
                 temp.setLength(0);
             }
-            GradesAdapter gradesAdapter = new GradesAdapter(grades);
+            GradesAdapter gradesAdapter = new GradesAdapter(assignments);
             gradesListView.setAdapter(gradesAdapter);
         });
 

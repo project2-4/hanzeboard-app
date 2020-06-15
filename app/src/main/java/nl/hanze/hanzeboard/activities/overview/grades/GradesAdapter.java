@@ -6,23 +6,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
 
 public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder> {
 
-    private List<Grade> grades;
+    private List<Assignment> assignments;
 
     /**
      * Constructor for the AnnouncementsAdapter class.
      *
-     * @param grades the array of Announcement objects.
+     * @param assignments the array of Announcement objects.
      */
-    public GradesAdapter(List<Grade> grades){
-        this.grades = grades;
+    public GradesAdapter(List<Assignment> assignments){
+        this.assignments = assignments;
     }
 
     /**
@@ -50,8 +53,8 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.assignmentListItem.setText(grades.get(position).getAssignment());
-        holder.gradeListItem.setText(String.valueOf(grades.get(position).getGrade())) ;
+        holder.assignmentListItem.setText(assignments.get(position).getAssignment());
+        holder.gradeListItem.setText(String.valueOf(assignments.get(position).getGrade())) ;
     }
 
     /**
@@ -61,7 +64,7 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        return grades.size();
+        return assignments.size();
     }
 
     /**
@@ -82,6 +85,12 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
             super(itemView);
             assignmentListItem = itemView.findViewById(R.id.assignmentListItem);
             gradeListItem = itemView.findViewById(R.id.gradeListItem);
+
+            itemView.setOnClickListener(v -> {
+                OverviewActivity host = (OverviewActivity) v.getContext();
+                host.setCurrentGrade(assignments.get(getAdapterPosition()));
+                NavHostFragment.findNavController(FragmentManager.findFragment(v)).navigate(R.id.navigate_to_gradeOverview);
+            });
         }
     }
 }

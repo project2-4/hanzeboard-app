@@ -75,8 +75,6 @@ public class CoursesFragment extends Fragment {
 
         List<CourseResponse> courses = ((OverviewActivity) requireActivity()).getCourseList();
 
-        Log.v("COURSESSS", String.valueOf(courses.size()));
-
         coursesView.setAdapter(new CoursesAdapter(courses));
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
