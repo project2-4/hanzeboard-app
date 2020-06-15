@@ -86,8 +86,8 @@ public class GradesFragment extends Fragment {
             StringBuilder temp = new StringBuilder();
             for(GradeResponse gradeResponse : gradeMessageResponseList){
                 temp.append(gradeResponse.getAssignmentResponse().getName());
-                temp.append(": ");
-                temp.append(gradeResponse.getAssignmentResponse().getSubjectResponse().getName());
+                // temp.append(": ");
+                // temp.append(gradeResponse.getAssignmentResponse().getSubjectResponse().getName());
                 grades.add(new Grade(Double.parseDouble(gradeResponse.getGrade()), temp.toString()));
                 temp.setLength(0);
             }
