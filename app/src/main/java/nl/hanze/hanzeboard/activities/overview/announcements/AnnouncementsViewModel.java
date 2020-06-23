@@ -35,27 +35,19 @@ public class AnnouncementsViewModel extends ViewModel {
 
             @Override
             public void onResponse(Call<AnnouncementMessageResponse> call, Response<AnnouncementMessageResponse> response) {
-                Log.v("ERROR: ", String.valueOf(response.errorBody()));
                 if (response.isSuccessful()) {
-                    Log.v("BODDDYYY", String.valueOf(response.body().getObjectList()));
                     mAnnouncementsData.setValue(response.body());
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
-                       Log.v("ERROR BODY:", jObjError.getJSONObject("error").getString("message"));
                     } catch (Exception e) {
-                        Log.v("EXCEPTION BODY:", e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<AnnouncementMessageResponse> call, Throwable t) {
-                Log.v("ERROR: ", t.getMessage());
-                Log.v("ERRORRRRRRR",t.getLocalizedMessage());
                 t.printStackTrace();
-                Log.v("ERROR1: ", String.valueOf(t.getStackTrace()[0]));
-                Log.v("ERROR2: ", String.valueOf(mAnnouncementsData.getValue()));
             }
         });
     }

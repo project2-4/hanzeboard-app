@@ -33,6 +33,7 @@ public class OverviewViewModel extends ViewModel {
     public void init(Context context) {
         userClient = API.createService(context, UserClient.class);
         courseClient = API.createService(context, CourseClient.class);
+        mUserCourses = new MutableLiveData<>();
 
         Call<UserResponse> userCall = userClient.me();
         userCall.enqueue(new Callback<UserResponse>() {

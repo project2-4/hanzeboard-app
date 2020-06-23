@@ -35,7 +35,6 @@ public class GradeOverviewFragment extends Fragment {
     private ArrayList<Integer> colorPanels;
     private ArrayList<String> labelsList;
 
-
     /**
      * Lifecycle method onCreateView. Sets the parameters and actions when the view is going to
      * be created.
@@ -97,8 +96,8 @@ public class GradeOverviewFragment extends Fragment {
         colorPanels.add(Color.rgb(138, 231, 252));
 
         labelsList = new ArrayList<>();
-        labelsList.add("Jouw cijfer");
-        labelsList.add("Cijfers van leerlingen per cijfercategorie");
+        labelsList.add(getString(R.string.users_grade));
+        labelsList.add(getString(R.string.grade_category));
 
         barChart.getLegend().setCustom(colorPanels, labelsList);
         barChart.getLegend().setTextSize(12);
@@ -138,7 +137,7 @@ public class GradeOverviewFragment extends Fragment {
         int higherRate = (int) ((counter / assignment.getSubmissions()) * 100);
         int passingRate = (int) ((assignment.getPassed() / assignment.getSubmissions()) * 100);
 
-        BarDataSet barDataset = new BarDataSet(entries, "Cijfers van leerlingen per categorie");
+        BarDataSet barDataset = new BarDataSet(entries, getString(R.string.grade_category));
         barDataset.setColors(colors);
 
         BarData data = new BarData(labels, barDataset);
@@ -146,17 +145,21 @@ public class GradeOverviewFragment extends Fragment {
         barChart.getData().setHighlightEnabled(false);
         barChart.getBarData().setValueTextSize(0);
 
-        if(counter == 0){
-            usersGradeView.setText("Jouw cijfer: " + assignment.getGrade() + " (je bent hiermee de beste student)");
-        }
-        else {
-            usersGradeView.setText("Jouw cijfer: " + assignment.getGrade() + " (" + higherRate + "% heeft hoger/ hetzelfde behaald)");
-        }
-        passingView.setText("Slagingspercentage: " + passingRate + "% (" + (int) assignment.getPassed() + " heeft het gehaald)");
-        averageGradeView.setText("Gemiddeld cijfer: " + (Math.round(assignment.getAverageGrade() * 100.0) / 100.0));
-        creditsView.setText("Credits: " + assignment.getCredits());
+        String passedText = getString(R.string.passing_rate) + " " + passingRate + "% (" + (int) assignment.getPassed() + " " + getString(R.string.passing_text) + ")";
+        String avgText = getString(R.string.average_grade) + " " + (Math.round(assignment.getAverageGrade() * 100.0) / 100.0);
+        String creditsText = getString(R.string.credits) + " " + assignment.getCredits();
+        String gradeText = getString(R.string.users_grade) + ": " + assignment.getGrade();
+        if(counter == 0)
+            gradeText += " (" + getString(R.string.user_excelled) + ")";
+        else
+            gradeText += " (" + higherRate + "% " + getString(R.string.other_users_excelled) + ")";
 
-        ((OverviewActivity) getActivity()).getSupportActionBar().setTitle("Cijfer overzicht:");
+        passingView.setText(passedText);
+        averageGradeView.setText(avgText);
+        creditsView.setText(creditsText);
+        usersGradeView.setText(gradeText);
+
+        ((OverviewActivity) getActivity()).getSupportActionBar().setTitle(R.string.grade_overview);
         ((OverviewActivity) getActivity()).getSupportActionBar().setSubtitle(assignment.getAssignment());
     }
 

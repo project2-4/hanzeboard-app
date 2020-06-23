@@ -9,16 +9,16 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
-        android:layout_width="380dp"
-        android:layout_height="498dp"
+        android:layout_width="394dp"
+        android:layout_height="519dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="372dp"
-        android:layout_height="152dp"
+        android:layout_width="399dp"
+        android:layout_height="157dp"
         android:layout_marginTop="8dp"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,60 +27,62 @@
         app:layout_constraintTop_toBottomOf="@+id/barChart">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="393dp"
+            android:layout_width="401dp"
             android:layout_height="match_parent"
             android:padding="8dp">
 
             <TextView
                 android:id="@+id/averageGrade"
-                android:layout_width="160dp"
-                android:layout_height="37dp"
+                android:layout_width="182dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="56dp"
                 android:background="?attr/selectableItemBackground"
                 android:padding="8dp"
-                android:text="Average Grade"
+                android:text="@string/average_grade"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userGrade" />
 
             <TextView
                 android:id="@+id/passingRate"
-                android:layout_width="357dp"
-                android:layout_height="42dp"
+                android:layout_width="383dp"
+                android:layout_height="36dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="7dp"
                 android:background="?attr/selectableItemBackground"
                 android:padding="8dp"
-                android:text="Average assignment"
+                android:text="@string/passing_rate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintBottom_toTopOf="@+id/averageGrade"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userGrade" />
+                app:layout_constraintTop_toBottomOf="@+id/userGrade"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/userGrade"
-                android:layout_width="359dp"
-                android:layout_height="40dp"
+                android:layout_width="382dp"
+                android:layout_height="51dp"
                 android:background="?attr/selectableItemBackground"
                 android:padding="8dp"
-                android:text="User's assignment"
+                android:text="@string/users_grade"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/credits"
-                android:layout_width="178dp"
-                android:layout_height="37dp"
+                android:layout_width="192dp"
+                android:layout_height="33dp"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="56dp"
                 android:padding="8dp"
-                android:text="Credits"
+                android:text="@string/credits"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/averageGrade"
-                app:layout_constraintTop_toBottomOf="@+id/passingRate" />
+                app:layout_constraintTop_toBottomOf="@+id/userGrade" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

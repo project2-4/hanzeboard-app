@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HanzeBoard</string>
+    <string name="key_jwt_token">JWT_TOKEN</string>
+    <string name="key_tokens">TOKENS</string>
+    <string name="http_cookies">HTTP_COOKIES</string>
+    <string name="title_activity_overview">Overview</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_grades">Cijfers</string>
+    <string name="menu_absent">Absente docenten</string>
+    <string name="menu_announcements">Mededelingen</string>
+    <string name="home_second">Home Second</string>
+    <string name="welcome">Welkom bij de HanzeBoard App!</string>
+</resources>

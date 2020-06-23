@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HanzeBoard</string>
+    <string name="title_activity_overview">Overzicht</string>
+    <string name="nav_header_desc">Navigatie header</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_grades">Cijfers</string>
+    <string name="menu_absent">Absente docenten</string>
+    <string name="menu_announcements">Mededelingen</string>
+    <string name="welcome">Welkom bij de HanzeBoard App!</string>
+    <string name="email">Email</string>
+    <string name="password">Wachtwoord</string>
+    <string name="average_grade">"Gemiddeld Cijfer: "</string>
+    <string name="passing_rate">"Slagingspercentage: "</string>
+    <string name="users_grade">Jouw cijfer</string>
+    <string name="credits">"Credits: "</string>
+    <string name="grade_overview">Cijfer overzicht</string>
+    <string name="passing_text">" heeft het gehaald"</string>
+    <string name="user_excelled">" je bent hiermee de beste student"</string>
+    <string name="other_users_excelled">heeft hoger/ hetzelfde behaald</string>
+    <string name="grade_category">Cijfers van leerlingen per categorie</string>
+</resources>
