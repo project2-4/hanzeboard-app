@@ -28,4 +28,11 @@
     <string name="user_excelled">with this result you are the best student.</string>
     <string name="other_users_excelled">achieved the same/ higher result</string>
     <string name="grade_category">Students\' grades per category</string>
+    <string name="language_dutch">Dutch</string>
+    <string name="language_english">English</string>
+    <string name="language_french">French</string>
+    <string name="language_japanese">Japanese</string>
+    <string name="language_chinese">Chinese</string>
+    <string name="language_chinese_mandarin">Mandarin Chinese</string>
+    <string name="language_taiwanese_mandarin">Taiwanese Mandarin</string>
 </resources>

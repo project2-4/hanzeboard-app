@@ -1,9 +1,19 @@
 package nl.hanze.hanzeboard.activities.overview;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.activities.overview.grades.Assignment;
@@ -43,6 +54,51 @@ public class OverviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
         courseList = new ArrayList<>();
         init();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.language_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.dutch:
+                setAppLocale(new Locale("nl"));
+                return true;
+            case R.id.english:
+                setAppLocale(new Locale("en"));
+                return true;
+            case R.id.french:
+                setAppLocale(new Locale("fr"));
+                return true;
+            case R.id.japanese:
+                setAppLocale(new Locale("ja"));
+                return true;
+            case R.id.chinese:
+                return true;
+            case R.id.mandarin_chinese:
+                setAppLocale(new Locale("zh"));
+                return true;
+            case R.id.taiwanese_mandarin:
+                setAppLocale(new Locale("zh", "TW"));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setAppLocale(Locale locale){
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, dm);
+        startActivity(new Intent(this, OverviewActivity.class));
+        finish();
     }
 
     /**

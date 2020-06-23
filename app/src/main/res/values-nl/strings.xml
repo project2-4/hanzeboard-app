@@ -20,4 +20,11 @@
     <string name="user_excelled">" je bent hiermee de beste student"</string>
     <string name="other_users_excelled">heeft hoger/ hetzelfde behaald</string>
     <string name="grade_category">Cijfers van leerlingen per categorie</string>
+    <string name="language_dutch">Nederlands</string>
+    <string name="language_english">Engels</string>
+    <string name="language_french">Frans</string>
+    <string name="language_japanese">Japans</string>
+    <string name="language_chinese_mandarin">Mandarijn Chinees</string>
+    <string name="language_taiwanese_mandarin">Taiwanees Mandarijn</string>
+    <string name="language_chinese">Chinees</string>
 </resources>

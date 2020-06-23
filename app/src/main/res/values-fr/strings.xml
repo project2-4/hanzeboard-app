@@ -20,4 +20,11 @@
     <string name="user_excelled">avec ce résultat, tu est le meilleur élève.</string>
     <string name="other_users_excelled">obtenu le même résultat/ résultat supérieur</string>
     <string name="grade_category">Notes des étudiants par catégorie</string>
+    <string name="language_taiwanese_mandarin">Chinois traditionnel</string>
+    <string name="language_chinese_mandarin">Chinois simplifié</string>
+    <string name="language_japanese">Japonaise</string>
+    <string name="language_french">Français</string>
+    <string name="language_english">Anglais</string>
+    <string name="language_dutch">Néerlandais</string>
+    <string name="language_chinese">Chinois</string>
 </resources>
