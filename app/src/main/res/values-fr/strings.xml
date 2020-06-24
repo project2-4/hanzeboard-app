@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HanzeBoard</string>
+    <string name="welcome">Bienvenue dans l\'application HanzeBoard!</string>
+    <string name="menu_announcements">Annonces</string>
+    <string name="menu_absent">Professeurs absents</string>
+    <string name="menu_grades">Notes</string>
+    <string name="menu_home">Home</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="title_activity_overview">Aperçu</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="average_grade">La note moyenne:</string>
+    <string name="passing_rate">Taux de réussite:</string>
+    <string name="users_grade">Ton résultat</string>
+    <string name="credits">Crédits:</string>
+    <string name="grade_overview">Aperçu des notes</string>
+    <string name="passing_text">passé</string>
+    <string name="user_excelled">avec ce résultat, tu est le meilleur élève.</string>
+    <string name="other_users_excelled">obtenu le même résultat/ résultat supérieur</string>
+    <string name="grade_category">Notes des étudiants par catégorie</string>
+    <string name="language_taiwanese_mandarin">Chinois traditionnel</string>
+    <string name="language_chinese_mandarin">Chinois simplifié</string>
+    <string name="language_japanese">Japonaise</string>
+    <string name="language_french">Français</string>
+    <string name="language_english">Anglais</string>
+    <string name="language_dutch">Néerlandais</string>
+    <string name="language_chinese">Chinois</string>
+</resources>

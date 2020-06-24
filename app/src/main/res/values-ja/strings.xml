@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HanzeBoard</string>
+    <string name="title_activity_overview">概要</string>
+    <string name="grade_overview">グレード概要</string>
+    <string name="nav_header_desc">ナビゲーションヘッダー</string>
+    <string name="action_settings">設定</string>
+    <string name="menu_home">ホーム</string>
+    <string name="menu_grades">グレード</string>
+    <string name="menu_absent">不在の教師</string>
+    <string name="menu_announcements">発表</string>
+    <string name="welcome">HanzeBoard Appへようこそ!</string>
+    <string name="email">Eメール</string>
+    <string name="password">パスワード</string>
+    <string name="average_grade">平均評価:</string>
+    <string name="passing_rate">合格率:</string>
+    <string name="users_grade">あなたの成績</string>
+    <string name="credits">クレジット:</string>
+    <string name="passing_text">が合格</string>
+    <string name="user_excelled">この結果であなたは最高の学生です。</string>
+    <string name="other_users_excelled">が同じまたはより良い結果を達成した</string>
+    <string name="grade_category">カテゴリごとの学生の成績</string>
+    <string name="language_dutch">オランダ語</string>
+    <string name="language_english">英語</string>
+    <string name="language_french">フランス語</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_chinese_mandarin">簡体字中国語</string>
+    <string name="language_taiwanese_mandarin">繁体字中国語</string>
+    <string name="language_chinese">中国語</string>
+</resources>

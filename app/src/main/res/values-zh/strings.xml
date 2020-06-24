@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HanzeBoard</string>
+    <string name="title_activity_overview">总览</string>
+    <string name="nav_header_desc">导航标题</string>
+    <string name="action_settings">序设置</string>
+    <string name="menu_home">主屏幕</string>
+    <string name="menu_grades">等级</string>
+    <string name="grade_overview">等级总览</string>
+    <string name="menu_absent">缺席者</string>
+    <string name="menu_announcements">公告</string>
+    <string name="welcome">欢迎来到HanzeBoard App!</string>
+    <string name="email">电子邮件</string>
+    <string name="password">密码</string>
+    <string name="average_grade">平均等级</string>
+    <string name="passing_rate">合格率</string>
+    <string name="users_grade">你的等级</string>
+    <string name="credits">信用</string>
+    <string name="passing_text">已通过</string>
+    <string name="user_excelled">这样的成绩, 你是最好的学生</string>
+    <string name="other_users_excelled">达到相同/更高的结果</string>
+    <string name="grade_category">每个类别的学生成绩</string>
+    <string name="language_dutch">荷兰语</string>
+    <string name="language_english">英语</string>
+    <string name="language_french">法语</string>
+    <string name="language_japanese">日语</string>
+    <string name="language_chinese_mandarin">简体中文</string>
+    <string name="language_taiwanese_mandarin">正體中文</string>
+    <string name="language_chinese">中文</string>
+</resources>
