@@ -30,5 +30,9 @@ public class UserResponse {
     public String getAvatarUrl() {
         return avatarUrl;
     }
+
+    public void setAvatarUrl(String url) {
+        avatarUrl = url;
+    }
 }
 

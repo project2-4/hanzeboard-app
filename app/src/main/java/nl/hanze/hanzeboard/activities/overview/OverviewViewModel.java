@@ -65,6 +65,29 @@ public class OverviewViewModel extends ViewModel {
         });
     }
 
+    public void updateAvatar(String url) {
+//        UserResponse current = mUser.getValue();
+//        if(current != null) {
+//            current.setAvatarUrl(url);
+//            mUser.postValue(current);
+//        }
+
+        Call<UserResponse> userCall = userClient.me();
+        userCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    mUser.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Log.v("ERROR: ", t.getMessage());
+            }
+        });
+    }
+
     /**
      * Getter for the mUser property.
      *

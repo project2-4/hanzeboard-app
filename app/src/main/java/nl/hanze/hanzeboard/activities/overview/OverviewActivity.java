@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -31,7 +32,7 @@ import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
 public class OverviewActivity extends AppCompatActivity {
 
-    protected OverviewViewModel mViewModel;
+    public static OverviewViewModel mViewModel;
 
     private AppBarConfiguration mAppBarConfiguration;
     private List<CourseResponse> courseList;

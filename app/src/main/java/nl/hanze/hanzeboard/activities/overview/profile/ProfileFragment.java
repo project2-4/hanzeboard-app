@@ -22,6 +22,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,9 +38,11 @@ import java.util.List;
 import nl.hanze.hanzeboard.GlideApp;
 import nl.hanze.hanzeboard.R;
 import nl.hanze.hanzeboard.activities.overview.OverviewActivity;
+import nl.hanze.hanzeboard.activities.overview.OverviewViewModel;
 import nl.hanze.hanzeboard.activities.overview.absent.AbsentViewModel;
 import nl.hanze.hanzeboard.activities.overview.announcements.AnnouncementsFragment;
 import nl.hanze.hanzeboard.activities.overview.courses.CoursesAdapter;
+import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.responses.UserResponse;
 import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
@@ -51,6 +54,8 @@ public class ProfileFragment extends Fragment {
     private int PROFILE_IMAGE_RESULT = 22;
     private ProfileViewModel mViewModel;
     public String currentPhotoPath;
+
+    protected OverviewViewModel overviewViewModel;
 
     /**
      * Lifecycle method onCreateView. Sets the parameters and actions when the view is going to
@@ -94,7 +99,14 @@ public class ProfileFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         mViewModel.init(getContext());
 
+        overviewViewModel = OverviewActivity.mViewModel;
+
+
         String avatarUrl = "https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg";
+
+        if(overviewViewModel.getUser().getValue() != null) {
+            avatarUrl = API.STORAGE_URL + overviewViewModel.getUser().getValue().getAvatarUrl();
+        }
 
         GlideApp.with(profileView)
                 .load(avatarUrl)
@@ -144,7 +156,7 @@ public class ProfileFragment extends Fragment {
             Uri selectedImage = Uri.fromFile(avatar);
             mediaScanIntent.setData(selectedImage);
 
-            mViewModel.setProfileUrl(selectedImage, avatar, this);
+            mViewModel.setProfileUrl(selectedImage, avatar, this, overviewViewModel);
         }
     }
 

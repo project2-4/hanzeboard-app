@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
+import nl.hanze.hanzeboard.activities.overview.OverviewViewModel;
 import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.ProfileClient;
 import nl.hanze.hanzeboard.api.responses.AvatarResponse;
@@ -29,7 +30,7 @@ public class ProfileViewModel extends ViewModel {
      * @param profileUrl
      * @return
      */
-    public boolean setProfileUrl(Uri profileUrl, File avatar, ProfileFragment fragment) {
+    public boolean setProfileUrl(Uri profileUrl, File avatar, ProfileFragment fragment, OverviewViewModel overviewViewModel) {
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), avatar);
         MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", avatar.getName(), requestFile);
         Call<AvatarResponse> avatarCall = profileClient.avatar(body);
@@ -40,6 +41,7 @@ public class ProfileViewModel extends ViewModel {
                 if (response.body() != null) {
                     avatarUrl = API.STORAGE_URL + response.body().getUser().getAvatarUrl();
                     fragment.setAvatar(avatarUrl);
+                    overviewViewModel.updateAvatar(avatarUrl);
                 }
             }
 
