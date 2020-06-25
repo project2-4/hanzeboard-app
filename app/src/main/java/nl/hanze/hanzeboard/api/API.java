@@ -10,7 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
 
-    private static final String BASE_URL = "http://10.0.2.2:8000/api/";
+    private static final String BASE_URL = "https://moetikwcpapierhalen.nl/api/";
+    public static final String STORAGE_URL = "https://moetikwcpapierhalen.nl/storage/";
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -22,7 +23,6 @@ public class API {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        //httpClient.addInterceptor(new AuthTokenGrabber(context));
         httpClient.addInterceptor(new AuthTokenInject(context));
         httpClient.addInterceptor(logging);
 

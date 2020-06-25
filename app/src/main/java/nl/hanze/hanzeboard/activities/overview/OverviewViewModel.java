@@ -7,12 +7,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 import nl.hanze.hanzeboard.api.API;
 import nl.hanze.hanzeboard.api.clients.CourseClient;
 import nl.hanze.hanzeboard.api.clients.UserClient;
-import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 import nl.hanze.hanzeboard.api.responses.course.CourseMessageResponse;
 import nl.hanze.hanzeboard.api.responses.UserResponse;
 import retrofit2.Call;

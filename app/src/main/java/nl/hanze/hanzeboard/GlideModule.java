@@ -1,0 +1,8 @@
+package nl.hanze.hanzeboard;
+
+import com.bumptech.glide.module.AppGlideModule;
+
+@com.bumptech.glide.annotation.GlideModule
+public class GlideModule extends AppGlideModule {
+
+}

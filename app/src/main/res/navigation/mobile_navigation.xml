@@ -9,7 +9,7 @@
         android:id="@+id/nav_home"
         android:name="nl.hanze.hanzeboard.activities.overview.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/home_fragment"></fragment>
+        tools:layout="@layout/home_fragment" />
 
     <fragment
         android:id="@+id/nav_courses"
@@ -37,12 +37,18 @@
         android:id="@+id/nav_grades"
         android:name="nl.hanze.hanzeboard.activities.overview.grades.GradesFragment"
         android:label="@string/menu_grades"
-        tools:layout="@layout/grades_fragment"></fragment>
+        tools:layout="@layout/grades_fragment" />
 
     <fragment
         android:id="@+id/nav_absent"
         android:name="nl.hanze.hanzeboard.activities.overview.absent.AbsentFragment"
         android:label="@string/menu_absent"
-        tools:layout="@layout/absent_fragment"></fragment>
+        tools:layout="@layout/absent_fragment" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="nl.hanze.hanzeboard.activities.overview.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/profile_fragment" />
 
 </navigation>

@@ -20,5 +20,9 @@
             android:id="@+id/nav_absent"
             android:icon="@drawable/ic_absent"
             android:title="@string/menu_absent" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="?android:attr/fingerprintAuthDrawable"
+            android:title="@string/menu_profile" />
     </group>
 </menu>

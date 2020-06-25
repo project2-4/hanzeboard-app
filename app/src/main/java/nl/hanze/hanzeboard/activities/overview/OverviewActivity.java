@@ -1,11 +1,16 @@
 package nl.hanze.hanzeboard.activities.overview;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,6 +21,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -23,11 +32,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.hanze.hanzeboard.R;
+import nl.hanze.hanzeboard.activities.LoginActivity;
+import nl.hanze.hanzeboard.api.API;
+import nl.hanze.hanzeboard.api.responses.UserResponse;
 import nl.hanze.hanzeboard.api.responses.course.CourseResponse;
 
 public class OverviewActivity extends AppCompatActivity {
 
-    private OverviewViewModel mViewModel;
+    protected OverviewViewModel mViewModel;
+
     private AppBarConfiguration mAppBarConfiguration;
     private List<CourseResponse> courseList;
     private int courseId;
@@ -84,7 +97,7 @@ public class OverviewActivity extends AppCompatActivity {
             String avatarUrl = "https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg";
 
             if (user.getAvatarUrl() != null) {
-                avatarUrl = user.getAvatarUrl();
+                avatarUrl = API.STORAGE_URL + user.getAvatarUrl();
             }
 
             Glide.with(menuView)
@@ -119,5 +132,9 @@ public class OverviewActivity extends AppCompatActivity {
 
     public CourseResponse getCurrentCourse(){
         return this.courseList.get(courseId);
+    }
+
+    public OverviewViewModel getViewModel() {
+        return mViewModel;
     }
 }
