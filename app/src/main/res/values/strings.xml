@@ -35,4 +35,9 @@
     <string name="language_chinese">Chinese</string>
     <string name="language_chinese_mandarin">Mandarin Chinese</string>
     <string name="language_taiwanese_mandarin">Taiwanese Mandarin</string>
+    <string name="posted_by">Placed by:</string>
+    <string name="posted_at">Placed at:</string>
+    <string name="sick">sick</string>
+    <string name="absent">absent</string>
+    <string name="leave">leave</string>
 </resources>

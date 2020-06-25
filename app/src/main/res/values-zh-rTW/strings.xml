@@ -27,4 +27,9 @@
     <string name="language_english">英語</string>
     <string name="language_dutch">荷蘭語</string>
     <string name="language_chinese">中文</string>
+    <string name="posted_at">放在:</string>
+    <string name="posted_by">放置:</string>
+    <string name="absent">缺席</string>
+    <string name="sick">生病</string>
+    <string name="leave">休假</string>
 </resources>
