@@ -2,11 +2,15 @@ package nl.hanze.hanzeboard.activities.overview.announcements;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import nl.hanze.hanzeboard.api.API;
@@ -18,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AnnouncementsViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 
     private AnnouncementClient announcementClient;
     private MutableLiveData<AnnouncementMessageResponse> mAnnouncementsData = new MutableLiveData<>();
@@ -29,16 +32,22 @@ public class AnnouncementsViewModel extends ViewModel {
         String id = course.getId();
         Call<AnnouncementMessageResponse> courseCall = announcementClient.getAnnouncements(id);
         courseCall.enqueue(new Callback<AnnouncementMessageResponse>() {
+
             @Override
             public void onResponse(Call<AnnouncementMessageResponse> call, Response<AnnouncementMessageResponse> response) {
                 if (response.isSuccessful()) {
                     mAnnouncementsData.setValue(response.body());
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                    } catch (Exception e) {
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<AnnouncementMessageResponse> call, Throwable t) {
-                Log.v("ERROR: ", t.getMessage());
+                t.printStackTrace();
             }
         });
     }

@@ -25,8 +25,7 @@
     <fragment
         android:id="@+id/nav_announcements"
         android:name="nl.hanze.hanzeboard.activities.overview.announcements.AnnouncementsFragment"
-        tools:layout="@layout/announcements_fragment"
-        >
+        tools:layout="@layout/announcements_fragment">
 
         <action
             android:id="@+id/navigate_to_courses"
@@ -37,18 +36,35 @@
         android:id="@+id/nav_grades"
         android:name="nl.hanze.hanzeboard.activities.overview.grades.GradesFragment"
         android:label="@string/menu_grades"
-        tools:layout="@layout/grades_fragment" />
+        tools:layout="@layout/grades_fragment">
+
+        <action
+            android:id="@+id/navigate_to_gradeOverview"
+            app:destination="@id/grade_overview" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/grade_overview"
+        android:name="nl.hanze.hanzeboard.activities.overview.grades.GradeOverviewFragment"
+        android:label="@string/menu_grades"
+        tools:layout="@layout/advanced_grade_overview">
+
+        <action
+            android:id="@+id/navigate_to_grades"
+            app:destination="@id/nav_grades" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_absent"
         android:name="nl.hanze.hanzeboard.activities.overview.absent.AbsentFragment"
         android:label="@string/menu_absent"
-        tools:layout="@layout/absent_fragment" />
+        tools:layout="@layout/absent_fragment"/>
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="nl.hanze.hanzeboard.activities.overview.profile.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/profile_fragment" />
-
+        tools:layout="@layout/profile_fragment"/>
 </navigation>

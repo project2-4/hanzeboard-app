@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 repositories {
     mavenCentral()
     maven { url 'https://maven.google.com' }
+    maven { url "https://jitpack.io" }
 }
 
 android {
@@ -34,6 +35,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.5'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

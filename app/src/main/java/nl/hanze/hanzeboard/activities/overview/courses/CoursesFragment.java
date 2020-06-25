@@ -74,8 +74,7 @@ public class CoursesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         List<CourseResponse> courses = ((OverviewActivity) requireActivity()).getCourseList();
-
-        Log.v("COURSESSS", String.valueOf(courses.size()));
+        Log.v("COURSES SIZE: ", String.valueOf(courses.size()));
 
         coursesView.setAdapter(new CoursesAdapter(courses));
 

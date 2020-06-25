@@ -64,6 +64,7 @@ public class AnnouncementsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         announcementsView = view.findViewById(R.id.announcementsView);
         announcementsView.setLayoutManager(new LinearLayoutManager(getContext()));
+        announcementsView.setAdapter(new AnnouncementsAdapter(new ArrayList<>()));
     }
 
     /**
