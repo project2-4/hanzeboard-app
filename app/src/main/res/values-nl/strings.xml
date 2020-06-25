@@ -27,4 +27,9 @@
     <string name="language_chinese_mandarin">Mandarijn Chinees</string>
     <string name="language_taiwanese_mandarin">Taiwanees Mandarijn</string>
     <string name="language_chinese">Chinees</string>
+    <string name="posted_by">Door:</string>
+    <string name="posted_at">Geplaatst op:</string>
+    <string name="sick">ziek</string>
+    <string name="absent">absent</string>
+    <string name="leave">met verlof</string>
 </resources>

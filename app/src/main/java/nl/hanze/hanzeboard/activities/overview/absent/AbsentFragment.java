@@ -86,10 +86,21 @@ public class AbsentFragment extends Fragment {
             Absentee temp;
             for(StaffResponse staffResponse : staffResponseList){
                 if(!staffResponse.getStaffProfileResponse().getStatusResponse().getStatus().equals("available")) {
+                    int id = 0;
+                    Log.v("STTAATTTTUSSSSSSSSSSSSSSS", staffResponse.getStaffProfileResponse().getStatusResponse().getStatus());
+                    if(staffResponse.getStaffProfileResponse().getStatusResponse().getStatus().toLowerCase().equals("sick")){
+                        id = R.string.sick;
+                    }
+                    else if(staffResponse.getStaffProfileResponse().getStatusResponse().getStatus().toLowerCase().equals("leave")){
+                        id = R.string.leave;
+                    }
+                    else if(staffResponse.getStaffProfileResponse().getStatusResponse().getStatus().toLowerCase().equals("absent")){
+                        id = R.string.absent;
+                    }
                     temp = new Absentee(
                             staffResponse.getFullName(),
                             staffResponse.getStaffProfileResponse().getAbbreviation(),
-                            staffResponse.getStaffProfileResponse().getStatusResponse().getStatus());
+                            getString(id));
                     absenteeList.add(temp);
                 }
             }

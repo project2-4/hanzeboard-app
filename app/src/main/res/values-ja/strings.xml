@@ -27,4 +27,9 @@
     <string name="language_chinese_mandarin">簡体字中国語</string>
     <string name="language_taiwanese_mandarin">繁体字中国語</string>
     <string name="language_chinese">中国語</string>
+    <string name="posted_by">によって配置された:</string>
+    <string name="posted_at">に置かれた:</string>
+    <string name="leave">休暇</string>
+    <string name="absent">欠席</string>
+    <string name="sick">病気</string>
 </resources>

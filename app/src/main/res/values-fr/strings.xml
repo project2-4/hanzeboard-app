@@ -27,4 +27,9 @@
     <string name="language_english">Anglais</string>
     <string name="language_dutch">Néerlandais</string>
     <string name="language_chinese">Chinois</string>
+    <string name="posted_by">Placé par:</string>
+    <string name="posted_at">Placé à:</string>
+    <string name="sick">malade</string>
+    <string name="absent">absent</string>
+    <string name="leave">en congé</string>
 </resources>

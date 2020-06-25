@@ -27,4 +27,9 @@
     <string name="language_chinese_mandarin">简体中文</string>
     <string name="language_taiwanese_mandarin">正體中文</string>
     <string name="language_chinese">中文</string>
+    <string name="posted_by">放置:</string>
+    <string name="posted_at">放在:</string>
+    <string name="leave">休假</string>
+    <string name="sick">生病</string>
+    <string name="absent">缺席</string>
 </resources>
