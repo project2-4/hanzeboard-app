@@ -101,10 +101,9 @@ public class ProfileFragment extends Fragment {
 
         overviewViewModel = OverviewActivity.mViewModel;
 
-
         String avatarUrl = "https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg";
 
-        if(overviewViewModel.getUser().getValue() != null) {
+        if(overviewViewModel.getUser().getValue() != null && overviewViewModel.getUser().getValue().getAvatarUrl() != null) {
             avatarUrl = API.STORAGE_URL + overviewViewModel.getUser().getValue().getAvatarUrl();
         }
 
